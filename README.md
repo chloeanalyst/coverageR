@@ -1,6 +1,6 @@
 # coverageR
  
-# openweatherr: Simple wrapper for Open Weather Map API
+# coverageR: Wrapper for batch one to many/many to many distance calculations.
 
 # Version - 1.0.0
 
@@ -10,7 +10,7 @@
 
 **coverageR**  Functions to calculate how many points are within the radius of a location. Utilises the distHaversine function from the geosphere package to calculate one to many or many to many location relationships. 
 
-## Use case example
+### Use case example
 
 *Which area of New York has the largest coverage of Hotels within 1km distance of a bus stop?* 
 
@@ -27,6 +27,8 @@ _Output & Original Data Visualised with Kepler_
 
 <img width="1007" alt="Screenshot 2021-09-12 at 00 33 25" src="https://user-images.githubusercontent.com/52977984/132966047-d5cbcbb6-7aea-4382-8055-ac94f45d9bc3.png">
 
+
+-----------------------------
 
 # Available Functions:
 
