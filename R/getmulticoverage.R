@@ -73,7 +73,7 @@ get.multi.coverage<- function(locations,points,distance){                       
 
   total <- cbind(total, overall_coverage)
 
-  rename(total, total_coverage = overall_coverage)
+  total <- total %>% rename(`Total Unique Coverage` = overall_coverage)
 
 
   return(total)                                                                      # Prints table when function is called.
