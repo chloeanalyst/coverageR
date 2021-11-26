@@ -40,13 +40,13 @@ get.total.coverage <- function(locations,lon,lat,distance) {
 
   result$total_locations <- nrow(locations)                                             # The total number of locations in the data set.
 
-  results$total_unique_locations <- nrow(unique(locations))
+  result$total_unique_locations <- nrow(unique(locations))
 
 
   result <- tibble(result$coverage_percentage,                                          # Create a tibble of results.
                    result$covered_locations,
                    result$total_locations,
-                   results$total_unique_locations)
+                   result$total_unique_locations)
 
 
 
