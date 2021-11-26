@@ -53,6 +53,7 @@
 get.transaction.coverage <- function(locations,points,distance){                                                       #User inputs - data frame of locations (lat,long), data frame of points (lat, long).
 
   total_results <- list()
+  total_coverage <- list()
 
 
   for (i in 1:nrow(points)) {
@@ -64,10 +65,27 @@ get.transaction.coverage <- function(locations,points,distance){                
     )             # Stores multiple results as a list.
   }
 
+  for (i in 1:nrow(points)) {
+    total_coverage[[i]] <- total.coverage(
+      locations,
+      points[i,1],                 # Iterates over the rows pulling out Latitude & Longitude.
+      points[i,2],
+      distance
+    )             # Stores multiple results as a list.
+  }
+
+
+
   total <- as.data.frame(do.call(rbind,total_results))                               # Merges lists into one table.
   total[is.na(total)] <- 0                                                           # Overwrite NA values
   total$`Count of Locations Covered` <- unlist(total$`Count of Locations Covered`)   # Un-lists Coverage (removes Boolean object)
   total$`Transactions Covered` <- unlist(total$`Transactions Covered`)
+  overall_coverage <- as.data.frame(do.call(rbind,total_coverage))
+  overall_coverage <- overall_coverage %>% unique %>% filter(coverage == TRUE) %>% nrow()
+
+  rename(total, total_coverage = overall_coverage)
+
+
 
   return(total)                                                                      # Prints table when function is called.
 
