@@ -83,6 +83,8 @@ get.transaction.coverage <- function(locations,points,distance){                
   overall_coverage <- as.data.frame(do.call(rbind,total_coverage))
   overall_coverage <- overall_coverage %>% unique %>% filter(coverage == TRUE) %>% nrow()
 
+  total <- cbind(total, overall_coverage)
+
   rename(total, total_coverage = overall_coverage)
 
 
