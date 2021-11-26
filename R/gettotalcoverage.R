@@ -53,8 +53,12 @@ get.total.coverage <- function(locations,lon,lat,distance) {
 
 
   result <- table(output$coverage)                                                      # Extract the coverage results from the output.
-  result$coverage_percentage <- c(round(result[2] / nrow(locations) * 100,2))   # Calculate the percentage of locations within range of the point of interest.
-  result$covered_locations <- result[2]                                                 # Calculate the total number of locations that are within range of the point of interest.
+  result$coverage_percentage <- if (length(result) == 2) {
+                                                            c(round(result[2] / nrow(hotel_locations) * 100,2))
+                                                          } else c(round(result[1] / nrow(hotel_locations) * 100,2))   # Calculate the percentage of locations within range of the point of interest.
+  result$covered_locations <- if (length(result) == 2) {
+                                                          result[2]
+                                                        } else result[1]                                              # Calculate the total number of locations that are within range of the point of interest.
   result$total_locations <- nrow(locations)                                             # The total number of locations in the data set.
 
 
