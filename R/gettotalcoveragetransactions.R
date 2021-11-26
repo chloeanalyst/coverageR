@@ -56,7 +56,7 @@ get.total.coverage.transactions <- function(locations,lon,lat,distance) {
 
 
   result <- table(output$coverage)                                                      # Extract the coverage results from the output.
-  result$coverage_percentage <- c(round(result[2] / (result[1] + result[2]) * 100,2))   # Calculate the percentage of locations within range of the point of interest.
+  result$coverage_percentage <- c(round(result[2] / nrow(locations) * 100,2))   # Calculate the percentage of locations within range of the point of interest.
   result$covered_locations <- result[2]                                                 # Calculate the total number of locations that are within range of the point of interest.
   result$total_locations <- nrow(locations)                                             # The total number of locations in the data set.
 
