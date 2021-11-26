@@ -66,6 +66,8 @@ get.total.coverage.transactions <- function(locations,lon,lat,distance) {
 
   result$total_locations <- nrow(locations)                                             # The total number of locations in the data set.
 
+  results$total_unique_locations <- nrow(unique(locations))
+
   combined <- cbind(hotel, covered = output[, 3])
   covered_transactions <- combined %>% filter( covered == TRUE ) %>% summarise( transactions = sum(transactions))
   total_transactions <- combined %>% summarise( transactions = sum(transactions))
@@ -81,6 +83,7 @@ get.total.coverage.transactions <- function(locations,lon,lat,distance) {
   result <- tibble(result$coverage_percentage,                                          # Create a tibble of results.
                    result$covered_locations,
                    result$total_locations,
+                   results$total_unique_locations,
                    result$transactions,
                    result$total_transactions,
                    result$percentage_transactions)
@@ -90,6 +93,7 @@ get.total.coverage.transactions <- function(locations,lon,lat,distance) {
   names(result) <- c("Coverage %",                                                      # Rename the columns.
                      "Count of Locations Covered",
                      "Total Locations",
+                     "Total Unique Locations",
                      "Transactions Covered",
                      "Total Transactions",
                      "Transaction %")
