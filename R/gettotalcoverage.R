@@ -55,16 +55,10 @@ get.total.coverage <- function(locations,lon,lat,distance) {
   result <- table(output$coverage)                                                      # Extract the coverage results from the output.
 
 
-  # Calculate coverage percentage
-  # LOGIC
-  # 1. IF the results table includes 2 columns (FALSE AND TRUE) then take the second column which is TRUE and divide by total number of hotels.
-  # 2. IF the results table does not include 2 columns and includes a column named FALSE we know that no locations are covered so return 0.
-  # 3. IF the results table does not include 2 columns and the present column is NOT named FALSE we know that there is a high coverage, take the first column which is TRUE and divide by total number of hotels.
-
-  result$coverage_percentage <- if(length(result) > 0 & length(result) == 2) { c(round(result[2] / nrow(locations)*100,2))} else if(dimnames(result) == "FALSE") { 0 } else c(round(result[1] / nrow(locations)*100,2))    # Calculate the percentage of locations within range of the point of interest.
+  result$coverage_percentage <- round(output %>% filter(coverage == TRUE) %>% nrow() / nrow(hotel_locations) * 100,2)      # Calculate the percentage of locations within range of the point of interest.
 
 
-  result$covered_locations <- if(length(result) > 0 & length(result) == 2) { result[2] } else if(dimnames(result) == "FALSE") { 0 } else result[1]                                            # Calculate the total number of locations that are within range of the point of interest.
+  result$covered_locations <- output %>% filter(coverage == TRUE) %>% nrow()                                             # Calculate the total number of locations that are within range of the point of interest.
 
 
 
